@@ -24,12 +24,9 @@ Paste this template in the file and replace <METRICOOL_USER_TOKEN> and <METRICOO
 {
     "mcpServers": {
         "mcp-metricool": {
-            "command": "uv",
+            "command": "uvx",
             "args": [
-                "--directory",
-                "C:/Users/your-path/metricool-mcp",
-                "run",
-                "server.py"
+                "git+https://github.com/viceentmarti4/mcp-metricool"
             ],
             "env": {
                 "METRICOOL_USER_TOKEN": "<METRICOOL_USER_TOKEN>",
