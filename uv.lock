@@ -149,14 +149,18 @@ cli = [
 
 [[package]]
 name = "mcp-metricool"
-version = "0.1.0"
+version = "1.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "httpx" },
     { name = "mcp", extra = ["cli"] },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "mcp", extras = ["cli"], specifier = ">=1.6.0" }]
+requires-dist = [
+    { name = "httpx", specifier = ">=0.28.1" },
+    { name = "mcp", extras = ["cli"], specifier = ">=1.6.0" },
+]
 
 [[package]]
 name = "mdurl"
