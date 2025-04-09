@@ -5,10 +5,13 @@ This is a Multi-Agent Collaboration Protocol (MCP) server for interacting with t
 ## Setup
 
 ### Prerequisites
+MCP is still very new and evolving, we recommend following the [MCP documentation](https://modelcontextprotocol.io/quickstart#prerequisites) to get the MCP basics up and running.
 
 - Python 3.8 or higher
-- A Metricool account with API access (Advanced Tier)
-- Required environment variables set up
+- [A Metricool account with API access (Advanced Tier)](https://metricool.com)
+- [Claude Desktop](https://claude.ai/) (or Cursor, or any MCP Client)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/)
+- [git](https://git-scm.com/downloads/)
 
 ### Configuration
 1. Configure Claude Desktop
