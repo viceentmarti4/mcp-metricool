@@ -3,7 +3,7 @@ import httpx
 from mcp.server.fastmcp import FastMCP
 import os
 from typing import List, Dict, Any
-
+import json
 
 # Initialize FastMCP server
 mcp = FastMCP("metricool")
@@ -13,6 +13,361 @@ METRICOOL_BASE_URL = "https://app.metricool.com/api"
 METRICOOL_USER_TOKEN = os.getenv("METRICOOL_USER_TOKEN")
 METRICOOL_USER_ID = os.getenv("METRICOOL_USER_ID")
 
+DATA = {
+  "providers": [
+    {
+      "network": "<string>",
+      "id": "<string>",
+      "status": "PUBLISHED",
+      "publicUrl": "<string>",
+      "detailedStatus": "<string>"
+    },
+    {
+      "network": "<string>",
+      "id": "<string>",
+      "status": "ERROR",
+      "publicUrl": "<string>",
+      "detailedStatus": "<string>"
+    }
+  ],
+  "publicationDate": {
+    "dateTime": "<string>",
+    "timezone": "<string>"
+  },
+  "text": "<string>",
+  "id": "<integer>",
+  "creationDate": {
+    "dateTime": "<string>",
+    "timezone": "<string>"
+  },
+  "firstCommentText": "<string>",
+  "media": [
+    "<string>",
+    "<string>"
+  ],
+  "autoPublish": "<boolean>",
+  "saveExternalMediaFiles": "<boolean>",
+  "mediaAltText": [
+    "<string>",
+    "<string>"
+  ],
+  "shortener": "<boolean>",
+  "draft": "<boolean>",
+  "location": {
+    "name": "<string>",
+    "link": "<string>",
+    "id": "<string>",
+    "location": {
+      "city": "<string>",
+      "country": "<string>",
+      "state": "<string>",
+      "street": "<string>",
+      "zip": "<string>",
+      "latitude": "<double>",
+      "longitude": "<double>"
+    },
+    "deleted": "<boolean>"
+  },
+  "videoCoverMilliseconds": "<long>",
+  "videoThumbnailUrl": "<string>",
+  "parentId": "<integer>",
+  "twitterData": {
+    "tags": [
+      {
+        "username": "<string>",
+        "x": "<double>",
+        "y": "<double>",
+        "deleted": "<boolean>"
+      },
+      {
+        "username": "<string>",
+        "x": "<double>",
+        "y": "<double>",
+        "deleted": "<boolean>"
+      }
+    ]
+  },
+  "facebookData": {
+    "boost": "<double>",
+    "boostPayer": "<string>",
+    "boostBeneficiary": "<string>",
+    "type": "<string>",
+    "title": "<string>"
+  },
+  "smartLinkData": {
+    "targetUrl": "<string>",
+    "ids": [
+      "<integer>",
+      "<integer>"
+    ]
+  },
+  "instagramData": {
+    "autoPublish": "<boolean>",
+    "tags": [
+      {
+        "username": "<string>",
+        "x": "<double>",
+        "y": "<double>",
+        "deleted": "<boolean>"
+      },
+      {
+        "username": "<string>",
+        "x": "<double>",
+        "y": "<double>",
+        "deleted": "<boolean>"
+      }
+    ],
+    "productTags": [
+      {
+        "productName": "<string>",
+        "productId": "<string>",
+        "x": "<double>",
+        "y": "<double>",
+        "catalogId": "<string>"
+      },
+      {
+        "productName": "<string>",
+        "productId": "<string>",
+        "x": "<double>",
+        "y": "<double>",
+        "catalogId": "<string>"
+      }
+    ],
+    "carouselTags": {
+      "enim1": [
+        {
+          "username": "<string>",
+          "x": "<double>",
+          "y": "<double>",
+          "deleted": "<boolean>"
+        },
+        {
+          "username": "<string>",
+          "x": "<double>",
+          "y": "<double>",
+          "deleted": "<boolean>"
+        }
+      ]
+    },
+    "carouselProductTags": {
+      "pariatur3": [
+        {
+          "productName": "<string>",
+          "productId": "<string>",
+          "x": "<double>",
+          "y": "<double>",
+          "catalogId": "<string>"
+        },
+        {
+          "productName": "<string>",
+          "productId": "<string>",
+          "x": "<double>",
+          "y": "<double>",
+          "catalogId": "<string>"
+        }
+      ],
+      "pariatur__": [
+        {
+          "productName": "<string>",
+          "productId": "<string>",
+          "x": "<double>",
+          "y": "<double>",
+          "catalogId": "<string>"
+        },
+        {
+          "productName": "<string>",
+          "productId": "<string>",
+          "x": "<double>",
+          "y": "<double>",
+          "catalogId": "<string>"
+        }
+      ]
+    },
+    "type": "<string>",
+    "showReelOnFeed": "<boolean>",
+    "boost": "<double>",
+    "boostPayer": "<string>",
+    "boostBeneficiary": "<string>",
+    "audioName": "<string>",
+    "collaborators": [
+      {
+        "username": "<string>",
+        "deleted": "<boolean>"
+      },
+      {
+        "username": "<string>",
+        "deleted": "<boolean>"
+      }
+    ]
+  },
+  "pinterestData": {
+    "boardId": "<string>",
+    "pinTitle": "<string>",
+    "pinLink": "<string>",
+    "pinNewFormat": "<boolean>"
+  },
+  "youtubeData": {
+    "title": "<string>",
+    "type": "<string>",
+    "privacy": "<string>",
+    "tags": [
+      "<string>",
+      "<string>"
+    ],
+    "category": "<string>",
+    "madeForKids": "<boolean>"
+  },
+  "tiktokData": {
+    "disableComment": "<boolean>",
+    "disableDuet": "<boolean>",
+    "disableStitch": "<boolean>",
+    "privacyOption": "<string>",
+    "commercialContentThirdParty": "<boolean>",
+    "commercialContentOwnBrand": "<boolean>",
+    "title": "<string>",
+    "autoAddMusic": "<boolean>",
+    "photoCoverIndex": "<integer>"
+  },
+  "linkedinData": {
+    "documentTitle": "<string>",
+    "publishImagesAsPDF": "<boolean>",
+    "previewIncluded": "<boolean>",
+    "type": "<string>",
+    "poll": {
+      "question": "<string>",
+      "options": [
+        {
+          "text": "<string>"
+        },
+        {
+          "text": "<string>"
+        }
+      ],
+      "settings": {
+        "duration": "<string>"
+      }
+    }
+  },
+  "autolistData": {
+    "id": "<integer>",
+    "name": "<string>"
+  },
+  "brandName": "<string>",
+  "targetBrandId": "<integer>",
+  "gmbData": {
+    "type": "<string>"
+  },
+  "descendants": [
+    {
+      "value": "<Circular reference to #/components/schemas/ScheduledPost detected>"
+    },
+    {
+      "value": "<Circular reference to #/components/schemas/ScheduledPost detected>"
+    }
+  ],
+  "notes": [
+    {
+      "created": {
+        "dateTime": "<string>",
+        "timezone": "<string>"
+      },
+      "id": "<integer>",
+      "postId": "<integer>",
+      "userId": "<integer>",
+      "userName": "<string>",
+      "content": "<string>",
+      "updatedDate": {
+        "dateTime": "<string>",
+        "timezone": "<string>"
+      },
+      "updated": "<boolean>",
+      "deletedDate": {
+        "dateTime": "<string>",
+        "timezone": "<string>"
+      },
+      "deleted": "<boolean>"
+    },
+    {
+      "created": {
+        "dateTime": "<string>",
+        "timezone": "<string>"
+      },
+      "id": "<integer>",
+      "postId": "<integer>",
+      "userId": "<integer>",
+      "userName": "<string>",
+      "content": "<string>",
+      "updatedDate": {
+        "dateTime": "<string>",
+        "timezone": "<string>"
+      },
+      "updated": "<boolean>",
+      "deletedDate": {
+        "dateTime": "<string>",
+        "timezone": "<string>"
+      },
+      "deleted": "<boolean>"
+    }
+  ],
+  "hasNotReadNotes": "<boolean>",
+  "uuid": "<string>",
+  "copiedFrom": "<string>",
+  "creatorUserMail": "<string>",
+  "creatorUserId": "<integer>",
+  "postApprovalData": {
+    "approvalEvents": [
+      {
+        "postUuid": "<string>",
+        "postId": "<integer>",
+        "reviewerId": "<integer>",
+        "reviewerMail": "<string>",
+        "status": "<string>",
+        "updatedDate": {
+          "dateTime": "<string>",
+          "timezone": "<string>"
+        },
+        "deletedDate": {
+          "dateTime": "<string>",
+          "timezone": "<string>"
+        },
+        "deleted": "<boolean>"
+      },
+      {
+        "postUuid": "<string>",
+        "postId": "<integer>",
+        "reviewerId": "<integer>",
+        "reviewerMail": "<string>",
+        "status": "<string>",
+        "updatedDate": {
+          "dateTime": "<string>",
+          "timezone": "<string>"
+        },
+        "deletedDate": {
+          "dateTime": "<string>",
+          "timezone": "<string>"
+        },
+        "deleted": "<boolean>"
+      }
+    ],
+    "approvalStatus": "<string>",
+    "approvalCriteria": "<string>",
+    "sendMailToReviewers": "<boolean>",
+    "saveData": "<boolean>"
+  },
+  "threadsData": {
+    "allowedCountryCodes": [
+      "<string>",
+      "<string>"
+    ]
+  },
+  "blueskyData": {
+    "postLanguages": [
+      "<string>",
+      "<string>"
+    ]
+  },
+  "libraryPostId": "<long>"
+}
 
 async def make_get_request(url: str) -> dict[str, Any] | None:
     """Make a get request to the Metricool API with proper error handling."""
@@ -27,14 +382,16 @@ async def make_get_request(url: str) -> dict[str, Any] | None:
         except Exception:
             return None
         
-async def make_post_request(url: str, data: dict[str, Any]) -> dict[str, Any] | None:
+async def make_post_request(url: str, data: json) -> dict[str, Any] | None:
     """Make a post request to the Metricool API with proper error handling."""
     headers = {
         "X-Mc-Auth": METRICOOL_USER_TOKEN,
+        "content-type": "application/json",
+        "accept": "application/json"
     }
     async with httpx.AsyncClient() as client:
         try:
-            response = await client.post(url, headers=headers, json=data, timeout=30.0)
+            response = await client.post(url, headers=headers, data=data, timeout=30.0)
             response.raise_for_status()
             return response.json()
         except Exception:
@@ -395,7 +752,50 @@ async def get_TiktokAds_Campaigns(init_date: str, end_date: str, blog_id: int) -
     
     return response
 
+@mcp.tool()
+async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
+    """
+    Schedule a post to Metricool at a specific date and time. 
+    To be able to schedule the post, you need to maintain the {DATA} structure.
+    
+    Args:
+     date: Date and time to publish the post. The format is 2025-01-01T00:00:00
+     blog id: Blog id of the Metricool brand account.
+     info: Data of the post to be scheduled. Should be a json object with the following fields:
+        autoPublish: True or False, default is True.
+        draft: True or False, default is False.
+        firstCommentText: Text of the first comment of the post. Default ""
+        hasNotReadNotes: True or False, default is False.
+        media: default is empty list.
+        mediaAltText: default is empty list.
+        providers: always need at least one provider with the format [{"network":"<string>"}]. Use "twitter" for X posts.
+        publicationDate: Date and timezone of the post. The format is {dateTime:"2025-01-01T00:00:00", timezone:"Europe/Madrid"}
+        shortener: True or False, default is False.
+        smartLinkData: default is {ids:[]}
+        text: Text of the post.
+        Always you need to add the networkData for the posts, as empty if you don't have more information. Only include the networkData for the networks you have in the providers list. 
+            The format is "twitterData": {"tags":[]}, 
+                            "facebookData": {"boost":0, "boostPayer":"", "boostBeneficiary":"", "type":"", "title":""}, 
+                            "instagramData": {"autoPublish":True, "tags":[]}, 
+                            "linkedinData": {"documentTitle": "<string>", "publishImagesAsPDF": "<boolean>", "previewIncluded": "<boolean>", "type": "<string>", "poll": {"question": "<string>", "options": [{"text": "<string>"}, {"text": "<string>"}], "settings": {"duration": "<string>"}}},    
+                            "pinterestData": {"boardId":"", "pinTitle":"","pinLink":"", "pinNewFormat":True}, 
+                            "youtubeData": {"title": "<string>", "type": "<string>", "privacy": "<string>", "tags": [ "<string>", "<string>" ], "category": "<string>", "madeForKids": "<boolean>"}, 
+                            "twitchData": {"autoPublish":True, "tags":[]}, 
+                            "tiktokData": {"disableComment": "<boolean>", "disableDuet": "<boolean>", "disableStitch": "<boolean>", "privacyOption": "<string>", "commercialContentThirdParty": "<boolean>", "commercialContentOwnBrand": "<boolean>", "title": "<string>", "autoAddMusic": "<boolean>", "photoCoverIndex": "<integer>"},
+                            "blueskyData": {"postLanguages":["",""]},
+                            "threadsData":{"allowedCountryCodes:["",""]}
+        The other fields are optional, but you need to add the ones you have. If you don't have more information, you can ask the user about it and wait until you have the information.
+    
+    """
 
+    url = f"{METRICOOL_BASE_URL}/v2/scheduler/posts?blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    
+    response = await make_post_request(url, data=json.dumps(info))
+
+    if not response:
+       return ("Failed to schedule the post")
+    
+    return response
 
 if __name__ == "__main__":
     # Initialize and run the server
