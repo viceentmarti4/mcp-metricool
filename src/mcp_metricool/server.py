@@ -756,7 +756,9 @@ async def get_TiktokAds_Campaigns(init_date: str, end_date: str, blog_id: int) -
 async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
     """
     Schedule a post to Metricool at a specific date and time. 
-    To be able to schedule the post, you need to maintain the {DATA} structure.
+    To be able to schedule the post, you need to maintain the structure.
+
+    You can use the tool get_Best_Time_To_Post to get the best time to post for a specific provider if the user doesn't specify the time to post.
     
     Args:
      date: Date and time to publish the post. The format is 2025-01-01T00:00:00
@@ -774,7 +776,7 @@ async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
         smartLinkData: default is {ids:[]}
         text: Text of the post.
         Always you need to add the networkData for the posts, as empty if you don't have more information. Only include the networkData for the networks you have in the providers list. 
-            The format is "twitterData": {"tags":[]}, 
+            The format is "twitterData": {"tags":[]}, Tags is used for tagging people on the images of the post, not hashtags.
                             "facebookData": {"boost":0, "boostPayer":"", "boostBeneficiary":"", "type":"", "title":""}, 
                             "instagramData": {"autoPublish":True, "tags":[]}, 
                             "linkedinData": {"documentTitle": "<string>", "publishImagesAsPDF": "<boolean>", "previewIncluded": "<boolean>", "type": "<string>", "poll": {"question": "<string>", "options": [{"text": "<string>"}, {"text": "<string>"}], "settings": {"duration": "<string>"}}},    
@@ -794,6 +796,29 @@ async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
 
     if not response:
        return ("Failed to schedule the post")
+    
+    return response
+
+@mcp.tool()
+async def get_Best_Time_To_Post(start: str, end: str, blog_id: int, provider: str, timezone: str) -> List[str]:
+    """
+    Get the best time to post for a specific provider. The return is a list of hours and days with a value. The higher the value, the best time to post.
+    Try to get the best for as maximum of 1 week. If you have day to publish but not hours, choose the start and end of this day.
+    
+    Args:
+     start: Start date of the period to get the data. The format is 2025-01-01
+     end: End date of the period to get the data. The format is 2025-01-01
+     blog id: Blog id of the Metricool brand account.
+     provider: Provider of the post. The format is "twitter", "facebook", "instagram", "linkedin", "youtube", "tiktok". Only these are accepted.
+     timezone: Timezone of the post. The format is "Europe%2FMadrid"
+    """
+
+    url = f"{METRICOOL_BASE_URL}/v2/scheduler/besttimes/{provider}?start={start}T00%3A00%3A00&end={end}T23%3A59%3A59&timezone={timezone}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+
+    response = await make_get_request(url)
+    
+    if not response:
+       return ("Failed to get the best time to post")
     
     return response
 
