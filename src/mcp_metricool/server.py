@@ -757,9 +757,14 @@ async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
     """
     Schedule a post to Metricool at a specific date and time. 
     To be able to schedule the post, you need to maintain the structure.
-
     You can use the tool get_Best_Time_To_Post to get the best time to post for a specific provider if the user doesn't specify the time to post.
-    
+    If the post include Instagram, is a must to have at least one image or video. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the post include Pinterest, is a must to have a image and the board where to publish the pin. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the post include Youtube, is a must to have a video, select the audience (if it's video made for kids or not) and the title of the video. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the post include Tiktok, is a must to have at least one image or video. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the posts is Facebook Reel, is a must to have a video. If is Facebook Story, image or video is needed. If you don't have more information, you can ask the user about it and wait until you have the information.
+    The date can't be in the past.
+
     Args:
      date: Date and time to publish the post. The format is 2025-01-01T00:00:00
      blog id: Blog id of the Metricool brand account.
