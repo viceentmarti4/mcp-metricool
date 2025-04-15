@@ -403,7 +403,7 @@ async def get_brands(state: str) -> List[str]:
     Get the list of brands from your Metricool account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/settings/brands?userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/settings/brands?userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -423,7 +423,7 @@ async def get_Instagram_Reels(init_date: str, end_date: str, blog_id: int) -> Li
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/reels/instagram?from={init_date}T00%3A00%3A00&to={end_date}T00%3A00%3A00&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/reels/instagram?from={init_date}T00%3A00%3A00&to={end_date}T00%3A00%3A00&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -443,7 +443,7 @@ async def get_Instagram_Posts(init_date: str, end_date: str, blog_id: int) -> Li
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/instagram?from={init_date}T00%3A00%3A00&to={end_date}T00%3A00%3A00&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/instagram?from={init_date}T00%3A00%3A00&to={end_date}T00%3A00%3A00&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -463,7 +463,7 @@ async def get_Instagram_Stories(init_date: str, end_date: str, blog_id: int) -> 
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/stories/instagram?start={init_date}T00%3A00%3A00&end={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/stories/instagram?start={init_date}T00%3A00%3A00&end={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -483,7 +483,7 @@ async def get_Tiktok_Videos(init_date: str, end_date: str, blog_id: int) -> List
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/tiktok?from={init_date}T00%3A00%3A00&to={end_date}T00%3A00%3A00&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/tiktok?from={init_date}T00%3A00%3A00&to={end_date}T00%3A00%3A00&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -503,7 +503,7 @@ async def get_Facebook_Reels(init_date: str, end_date: str, blog_id: int) -> Lis
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/reels/facebook?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/reels/facebook?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -523,7 +523,7 @@ async def get_Facebook_Posts(init_date: str, end_date: str, blog_id: int) -> Lis
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/facebook?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/facebook?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -543,7 +543,7 @@ async def get_Facebook_Stories(init_date: str, end_date: str, blog_id: int) -> L
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/stories/facebook?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/stories/facebook?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -563,7 +563,7 @@ async def get_Thread_Posts(init_date: str, end_date: str, blog_id: int) -> List[
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/threads?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/threads?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -583,7 +583,7 @@ async def get_X_Posts(init_date: str, end_date: str, blog_id: int) -> List[str]:
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/stats/twitter/posts?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/stats/twitter/posts?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -603,7 +603,7 @@ async def get_Bluesky_Posts(init_date: str, end_date: str, blog_id: int) -> List
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/bluesky?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/bluesky?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -623,7 +623,7 @@ async def get_Linkedin_Posts(init_date: str, end_date: str, blog_id: int) -> Lis
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/linkedin?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/linkedin?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -643,7 +643,7 @@ async def get_Pinterest_Pins(init_date: str, end_date: str, blog_id: int) -> Lis
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/pinterest?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/pinterest?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -663,7 +663,7 @@ async def get_Youtube_Videos(init_date: str, end_date: str, blog_id: int) -> Lis
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/youtube?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/posts/youtube?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -683,7 +683,7 @@ async def get_Twitch_Videos(init_date: str, end_date: str, blog_id: int) -> List
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/stats/twitch/videos?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/stats/twitch/videos?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -703,7 +703,7 @@ async def get_FacebookAds_Campaigns(init_date: str, end_date: str, blog_id: int)
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/stats/facebookads/campaigns?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/stats/facebookads/campaigns?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -723,7 +723,7 @@ async def get_GoogleAds_Campaigns(init_date: str, end_date: str, blog_id: int) -
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/stats/adwords/campaigns?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/stats/adwords/campaigns?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -743,7 +743,7 @@ async def get_TiktokAds_Campaigns(init_date: str, end_date: str, blog_id: int) -
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/analytics/campaigns/tiktokads?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/campaigns/tiktokads?from={init_date}T00%3A00%3A00&to={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_get_request(url)
 
@@ -795,7 +795,7 @@ async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
     
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/scheduler/posts?blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/scheduler/posts?blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
     
     response = await make_post_request(url, data=json.dumps(info))
 
@@ -818,7 +818,7 @@ async def get_Best_Time_To_Post(start: str, end: str, blog_id: int, provider: st
      timezone: Timezone of the post. The format is "Europe%2FMadrid".  Use the timezone of the user extracted from the get_brands tool.
     """
 
-    url = f"{METRICOOL_BASE_URL}/v2/scheduler/besttimes/{provider}?start={start}T00%3A00%3A00&end={end}T23%3A59%3A59&timezone={timezone}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/scheduler/besttimes/{provider}?start={start}T00%3A00%3A00&end={end}T23%3A59%3A59&timezone={timezone}&blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
 
     response = await make_get_request(url)
     
