@@ -403,7 +403,7 @@ async def get_brands(state: str) -> List[str]:
     Get the list of brands from your Metricool account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/admin/simpleProfiles?userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/settings/brands?userId={METRICOOL_USER_ID}"
     
     response = await make_get_request(url)
 
@@ -463,7 +463,7 @@ async def get_Instagram_Stories(init_date: str, end_date: str, blog_id: int) -> 
      blog id: Blog id of the Metricool brand account.
     """
 
-    url = f"{METRICOOL_BASE_URL}/stats/instagram/stories?start={init_date}&end={end_date}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
+    url = f"{METRICOOL_BASE_URL}/v2/analytics/stories/instagram?start={init_date}T00%3A00%3A00&end={end_date}T23%3A59%3A59&blogId={blog_id}&userId={METRICOOL_USER_ID}"
     
     response = await make_get_request(url)
 
