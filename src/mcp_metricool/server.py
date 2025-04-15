@@ -776,7 +776,7 @@ async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
         media: default is empty list.
         mediaAltText: default is empty list.
         providers: always need at least one provider with the format [{"network":"<string>"}]. Use "twitter" for X posts.
-        publicationDate: Date and timezone of the post. The format is {dateTime:"2025-01-01T00:00:00", timezone:"Europe/Madrid"}
+        publicationDate: Date and timezone of the post. The format is {dateTime:"2025-01-01T00:00:00", timezone:"Europe/Madrid"}. Use the timezone of the user extracted from the get_brands tool.
         shortener: True or False, default is False.
         smartLinkData: default is {ids:[]}
         text: Text of the post.
@@ -815,7 +815,7 @@ async def get_Best_Time_To_Post(start: str, end: str, blog_id: int, provider: st
      end: End date of the period to get the data. The format is 2025-01-01
      blog id: Blog id of the Metricool brand account.
      provider: Provider of the post. The format is "twitter", "facebook", "instagram", "linkedin", "youtube", "tiktok". Only these are accepted.
-     timezone: Timezone of the post. The format is "Europe%2FMadrid"
+     timezone: Timezone of the post. The format is "Europe%2FMadrid".  Use the timezone of the user extracted from the get_brands tool.
     """
 
     url = f"{METRICOOL_BASE_URL}/v2/scheduler/besttimes/{provider}?start={start}T00%3A00%3A00&end={end}T23%3A59%3A59&timezone={timezone}&blogId={blog_id}&userId={METRICOOL_USER_ID}"
@@ -826,6 +826,7 @@ async def get_Best_Time_To_Post(start: str, end: str, blog_id: int, provider: st
        return ("Failed to get the best time to post")
     
     return response
+
 
 if __name__ == "__main__":
     # Initialize and run the server
