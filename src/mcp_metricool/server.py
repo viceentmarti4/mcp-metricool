@@ -397,6 +397,36 @@ async def make_post_request(url: str, data: json) -> dict[str, Any] | None:
         except Exception:
             return None
 
+async def make_put_request(url: str, data: json) -> dict[str, Any] | None:
+    """Make a put request to the Metricool API with proper error handling."""
+    headers = {
+        "X-Mc-Auth": METRICOOL_USER_TOKEN,
+        "content-type": "application/json",
+        "accept": "application/json"
+    }
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.put(url, headers=headers, data=data, timeout=30.0)
+            response.raise_for_status()
+            return response.json()
+        except Exception:
+            return None
+
+async def make_patch_request(url: str, data: json) -> dict[str, Any] | None:
+    """Make a patch request to the Metricool API with proper error handling."""
+    headers = {
+        "X-Mc-Auth": METRICOOL_USER_TOKEN,
+        "content-type": "application/json",
+        "accept": "application/json"
+    }
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.patch(url, headers=headers, data=data, timeout=30.0)
+            response.raise_for_status()
+            return response.status_code
+        except Exception:
+            return None
+
 @mcp.tool()
 async def get_brands(state: str) -> List[str]:
     """
@@ -804,6 +834,7 @@ async def post_Schedule_Post(date:str, blog_id: int, info: json) -> str:
     
     return response
 
+
 @mcp.tool()
 async def get_Best_Time_To_Post(start: str, end: str, blog_id: int, provider: str, timezone: str) -> List[str]:
     """
@@ -827,6 +858,62 @@ async def get_Best_Time_To_Post(start: str, end: str, blog_id: int, provider: st
     
     return response
 
+@mcp.tool()
+async def update_Schedule_Post(id: str, date:str, blog_id: int, info: json) -> str:
+    """
+    Update a scheduled post in Metricool. You need the id of the post to update. Get it from the get_Scheduled_Posts tool previous on the conversation.
+    Ask the user if they're sure they want to modify the post, including what will be changed, and require them to confirm.
+    Do not retry if there is a problem.
+    To update the post, ensure the full original content is included in the request, modifying only the new information while keeping the rest unchanged and maintaining the original structure.
+    If the post include Instagram, is a must to have at least one image or video. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the post include Pinterest, is a must to have a image and the board where to publish the pin. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the post include Youtube, is a must to have a video, select the audience (if it's video made for kids or not) and the title of the video. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the post include Tiktok, is a must to have at least one image or video. If you don't have more information, you can ask the user about it and wait until you have the information.
+    If the posts is Facebook Reel, is a must to have a video. If is Facebook Story, image or video is needed. If you don't have more information, you can ask the user about it and wait until you have the information.
+    The date can't be in the past.
+
+    Args:
+     date: Date and time to publish the post. The format is 2025-01-01T00:00:00
+     id: id of the post to update. Get it from the get_Scheduled_Posts tool previous on the conversation.
+     blog id: Blog id of the Metricool brand account.
+     info: Data of the post to be scheduled. You need to send only the fields you want to update. This is so important. Should be a json object with the following fields:
+        id: id of the post to update. Get it from the get_Scheduled_Posts tool previous on the conversation. The format is "id":<integer>
+        uuid: uuid of the post to update. Get it from the get_Scheduled_Posts tool previous on the conversation. The format is "uuid":"<string>"
+        autoPublish: True or False, default is True.
+        draft: True or False, default is False.
+        firstCommentText: Text of the first comment of the post. Default ""
+        hasNotReadNotes: True or False, default is False.
+        media: default is empty list.
+        mediaAltText: default is empty list.
+        providers: always need at least one provider with the format [{"network":"<string>"}]. Use "twitter" for X posts.
+        publicationDate: Date and timezone of the post. The format is {dateTime:"2025-01-01T00:00:00", timezone:"Europe/Madrid"}
+        shortener: True or False, default is False.
+        smartLinkData: default is {ids:[]}
+        text: Text of the post.
+        Always you need to add the networkData for the posts, as empty if you don't have more information. Only include the networkData for the networks you have in the providers list. 
+            The format is "twitterData": {"tags":[]}, Tags is used for tagging people on the images of the post, not hashtags.
+                            "facebookData": {"boost":0, "boostPayer":"", "boostBeneficiary":"", "type":"", "title":""}, 
+                            "instagramData": {"autoPublish":True, "tags":[]}, 
+                            "linkedinData": {"documentTitle": "<string>", "publishImagesAsPDF": "<boolean>", "previewIncluded": "<boolean>", "type": "<string>", "poll": {"question": "<string>", "options": [{"text": "<string>"}, {"text": "<string>"}], "settings": {"duration": "<string>"}}},    
+                            "pinterestData": {"boardId":"", "pinTitle":"","pinLink":"", "pinNewFormat":True}, 
+                            "youtubeData": {"title": "<string>", "type": "<string>", "privacy": "<string>", "tags": [ "<string>", "<string>" ], "category": "<string>", "madeForKids": "<boolean>"}, 
+                            "twitchData": {"autoPublish":True, "tags":[]}, 
+                            "tiktokData": {"disableComment": "<boolean>", "disableDuet": "<boolean>", "disableStitch": "<boolean>", "privacyOption": "<string>", "commercialContentThirdParty": "<boolean>", "commercialContentOwnBrand": "<boolean>", "title": "<string>", "autoAddMusic": "<boolean>", "photoCoverIndex": "<integer>"},
+                            "blueskyData": {"postLanguages":["",""]},
+                            "threadsData":{"allowedCountryCodes:["",""]}
+       
+    
+    """
+
+    url = f"{METRICOOL_BASE_URL}/v2/scheduler/posts/{id}?blogId={blog_id}&userId={METRICOOL_USER_ID}&integrationSource=MCP"
+    
+    response = await make_put_request(url, data=json.dumps(info))
+
+    if not response:
+       return ("Failed to update the post")
+    
+    return response
+    
 
 if __name__ == "__main__":
     # Initialize and run the server
